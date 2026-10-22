@@ -29,6 +29,9 @@ jobs:
       - name: Test Python example
         run: python -m unittest discover -s examples/python-hello/tests -v
 
+      - name: Test Python Foundations workshop example
+        run: python -m unittest discover -s examples/python_foundations/tests -v
+
       - name: Validate issue-form YAML
         run: |
           ruby -e 'require "yaml"; Dir.glob(".github/ISSUE_TEMPLATE/*.yml").each { |file| YAML.load_file(file, aliases: true); puts "Validated #{file}" }'

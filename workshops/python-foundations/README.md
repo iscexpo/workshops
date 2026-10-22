@@ -103,6 +103,8 @@ Create a program that stores a workshop topic and a number of practice tasks, th
 
 For a starter exercise, run the [hello lab](labs/01-hello.py). The [mini challenge handout](labs/02-mini-challenge.md) includes a sample result and reflection questions.
 
+For a runnable version of the summary, see the [workshop summary example](../../examples/python_foundations/README.md). The guided labs on [variables and decisions](labs/03-variables-and-decisions.md) and [functions and testing](labs/04-functions-and-testing.md) walk through the example step by step.
+
 **Stretch:** Put the summary logic inside a function and write a test for it.
 
 ## Troubleshooting
