@@ -1,33 +1,62 @@
-# Publish this scaffold to GitHub
+# Repository Maintenance and Publishing
 
-This scaffold has been prepared locally; the script below creates a **new public** repository and pushes the current directory. It will stop if `iscexpo/workshops` already exists or is visible to the authenticated account, so it will not overwrite an existing repository.
+The public repository already exists at [iscexpo/workshops](https://github.com/iscexpo/workshops). This guide describes how to work with the existing repository safely; it is not an instruction to create a second repository.
 
-## Prerequisites
+## Clone the existing repository
 
-- Git installed
-- GitHub CLI (`gh`) installed
-- An account authorized to create public repositories in the `iscexpo` organization
-- Approval from the organization owner if your account does not have permission
-
-## Publish
-
-From the root of this folder:
+Prerequisites: Git, and a GitHub account with the appropriate permissions for the changes you intend to make.
 
 ```bash
-gh auth login
-bash scripts/publish-repo.sh
+git clone https://github.com/iscexpo/workshops.git
+cd workshops
+git switch -c docs/your-change
 ```
 
-Inspect the repository name, visibility, and files before confirming any GitHub CLI prompts. The script creates only `iscexpo/workshops`; it does not change organization settings or invite members.
-
-If you prefer to create the repository manually, create a **public** empty repository named `workshops` under `iscexpo` (do not initialize it with a README, license, or `.gitignore`), then run:
+Make your edits, then run the local validation and tests:
 
 ```bash
-git init -b main
-git add .
-git commit -m "chore: initialize ISC Expo workshops scaffold"
-git remote add origin https://github.com/iscexpo/workshops.git
-git push -u origin main
+python scripts/validate.py
+python -m compileall -q examples workshops
+python -m unittest discover -s examples/python-hello/tests -v
 ```
 
-If the repository already exists, stop and inspect it. Do not force-push or replace existing content. For an existing project, integrate these files through a branch and pull request instead.
+If Ruby is installed, also validate the GitHub issue-form YAML:
+
+```bash
+ruby -e 'require "yaml"; Dir.glob(".github/ISSUE_TEMPLATE/*.yml").each { |file| YAML.load_file(file, aliases: true); puts "Validated #{file}" }'
+```
+
+Review your diff and make sure you have not included credentials, private student information, or materials without permission:
+
+```bash
+git status --short
+git diff --check
+git diff
+```
+
+Commit your changes, push the branch, and open a pull request:
+
+```bash
+git add README.md PUBLISHING.md
+git commit -m "docs: clarify repository maintenance workflow"
+git push -u origin docs/your-change
+gh pr create --repo iscexpo/workshops --base main --head docs/your-change
+```
+
+Adjust the `git add` paths to match the files you actually changed. If you do not have write access to the organization, fork the repository and open a pull request from your fork.
+
+## CI validation
+
+Every push and pull request triggers the workflow at `.github/workflows/validate.yml`. A successful run checks required files, local Markdown link targets, Python compilation, example tests, and issue-form YAML.
+
+Inspect the workflow result before merging. A green check validates the automated checks; it does not replace human review of instructional accuracy, accessibility, safety, or license attribution.
+
+## Repository creation script
+
+`scripts/publish-repo.sh` is a guarded bootstrap helper intended for a fresh repository. Because `iscexpo/workshops` already exists, **do not run the creation script to publish this repository again**. It is designed to stop when the repository already exists or is visible to your account.
+
+For future changes to this existing repository, use the clone → branch → test → pull request workflow above. Never force-push or replace the existing repository history as a publishing shortcut.
+
+## Access and ownership
+
+Creating repositories, changing organization security settings, branch protection, or team permissions requires an authorized organization account. If the CLI reports insufficient permission, ask an organization owner to grant the smallest suitable role rather than sharing credentials or tokens.
