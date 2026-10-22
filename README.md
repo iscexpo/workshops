@@ -7,7 +7,7 @@ Hands-on learning resources, guided labs, starter projects, and workshop templat
 
 [Organization](https://github.com/iscexpo) · [Website](https://iscexpo.edu.bd) · [Support](mailto:info@iscexpo.edu.bd)
 
-> **Repository status:** Initial scaffold. Workshop materials may be drafts until a maintainer marks them as reviewed. Check each workshop's status before using it in a live class or event.
+> **Repository status:** The public repository is established and the initial scaffold is published. Individual workshop materials may still be drafts until a maintainer marks them as reviewed. Check each workshop's status before using it in a live class or event.
 
 ## What you'll find here
 
@@ -75,16 +75,14 @@ These labels describe the contents of a workshop, not academic accreditation or 
 
 Issues and pull requests are welcome for corrections, translations, new labs, accessibility improvements, and additional learning paths. Read [CONTRIBUTING.md](CONTRIBUTING.md), follow the [Code of Conduct](CODE_OF_CONDUCT.md), and use the templates in `templates/` as needed.
 
+For the contributor workflow and local checks, see [PUBLISHING.md](PUBLISHING.md).
+
 ## Safety, privacy, and licensing
 
 - Review commands before executing them; use a disposable environment for unfamiliar or destructive operations.
 - Keep tokens, passwords, private keys, environment files, and personal/student data out of commits and issue reports.
 - Report security concerns privately via [SECURITY.md](SECURITY.md).
 - Source-code examples are covered by the [MIT License](LICENSE). Original lesson text, diagrams, and other learning content are covered by [CC BY 4.0](CONTENT-LICENSE.md), unless a file states otherwise. Third-party content retains its own license and attribution requirements.
-
-## Publish this scaffold
-
-This local scaffold is not yet published to GitHub. See [PUBLISHING.md](PUBLISHING.md) for a guarded publish script and a manual setup path. Publishing requires a GitHub account authorized to create repositories in the `iscexpo` organization.
 
 ## Repository map
 
