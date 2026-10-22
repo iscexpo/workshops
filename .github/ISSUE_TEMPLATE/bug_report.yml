@@ -1,0 +1,35 @@
+name: Workshop issue or correction
+description: Report a technical error, unclear step, or broken resource.
+title: "fix: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: "Thank you for helping improve the learning materials. Do not include passwords, tokens, student IDs, grades, or private personal information."
+  - type: input
+    id: location
+    attributes:
+      label: Workshop or file path
+      placeholder: "workshops/python-foundations/README.md"
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is unclear or not working?
+      description: Include the step and a non-sensitive error message if relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Extra context
+      description: Include operating system or tool versions where relevant. Remove secrets and identifying details from logs or screenshots.
+    validations:
+      required: false

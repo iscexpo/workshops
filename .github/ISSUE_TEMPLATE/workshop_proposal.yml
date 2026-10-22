@@ -1,0 +1,43 @@
+name: Workshop or lab proposal
+description: Propose a new workshop, lab, translation, or learning path.
+title: "workshop: "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: "Describe the learner need and expected impact. Do not include confidential plans or private learner information."
+  - type: input
+    id: topic
+    attributes:
+      label: Proposed topic
+      placeholder: "e.g. Introduction to APIs"
+    validations:
+      required: true
+  - type: textarea
+    id: audience
+    attributes:
+      label: Intended learners
+      description: Include level and any prerequisites.
+    validations:
+      required: true
+  - type: textarea
+    id: outcomes
+    attributes:
+      label: Learning outcomes
+      description: What should learners be able to do by the end?
+    validations:
+      required: true
+  - type: textarea
+    id: format
+    attributes:
+      label: Suggested activities and tools
+      description: Include estimated duration, devices, connection needs, and any account requirements.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources, examples, or license notes
+      description: Link to references or explain where existing materials would come from.
+    validations:
+      required: false
