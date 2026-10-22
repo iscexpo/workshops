@@ -2,7 +2,7 @@
 
 **Level:** Beginner · **Duration:** 60–90 minutes · **Status:** Draft  
 **Audience:** Learners collaborating on code or learning materials  
-**Last reviewed:** Not yet reviewed
+**Maintainer:** [ISC Expo Workshops maintainers](mailto:info@iscexpo.edu.bd) · **Last reviewed:** Not yet reviewed
 
 ## Learning outcomes
 
@@ -11,6 +11,18 @@ Learners should be able to explain the difference between a repository and a com
 ## Prerequisites
 
 A Git installation, a terminal or GUI client, and a GitHub account if learners will push changes to GitHub. Account creation and access requirements should be arranged before class. Never share passwords or personal access tokens with a facilitator or classmate.
+
+## Local practice setup
+
+You do not need a GitHub account or network access to practice branches and commits. Open a terminal in a parent directory outside any existing project, then run these commands to create and enter a separate practice folder:
+
+```bash
+mkdir git-practice
+cd git-practice
+git init
+```
+
+Create a `README.md` in this folder with a text editor, then follow the practice flow below. Keep this exercise separate from real projects and shared repositories.
 
 ## Session plan
 
@@ -23,7 +35,7 @@ A Git installation, a terminal or GUI client, and a GitHub account if learners w
 
 ## Practice flow
 
-Use a repository where you have permission to contribute. Replace `<your-branch>` with a short branch name.
+For local practice, use the `README.md` created above. If using a shared repository, choose a sandbox or fork where you have permission to contribute; do not use a production repository for this exercise.
 
 ```bash
 git status
@@ -34,7 +46,7 @@ git add README.md
 git commit -m "docs: improve workshop introduction"
 ```
 
-If you are authorized to push to the repository:
+Pushing and opening a pull request are optional extensions that require a GitHub account and an authorized remote. Skip this step for local-only practice. If your class uses GitHub, push only to a sandbox or your own fork:
 
 ```bash
 git push -u origin docs/my-first-change

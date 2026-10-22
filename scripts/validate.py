@@ -28,6 +28,7 @@ REQUIRED_FILES = (
     ".github/workflows/validate.yml",
 )
 LINK_RE = re.compile(r"!?(?:\[[^\]]*\])\(([^)]+)\)")
+HEADING_RE = re.compile(r"^\s{0,3}#{1,6}\s+(.+?)\s*#*\s*$", re.MULTILINE)
 
 
 def check_required_files() -> list[str]:
@@ -36,6 +37,22 @@ def check_required_files() -> list[str]:
         if not (ROOT / relative).is_file():
             errors.append(f"Missing required file: {relative}")
     return errors
+
+
+def markdown_heading_slugs(text: str) -> set[str]:
+    slugs: set[str] = set()
+    occurrences: dict[str, int] = {}
+    for match in HEADING_RE.finditer(text):
+        heading = re.sub(r"`([^`]*)`", r"\1", match.group(1))
+        heading = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", heading)
+        slug = re.sub(r"[^\w -]", "", heading.lower())
+        slug = re.sub(r"\s+", "-", slug.strip())
+        if not slug:
+            continue
+        occurrence = occurrences.get(slug, 0)
+        occurrences[slug] = occurrence + 1
+        slugs.add(slug if occurrence == 0 else f"{slug}-{occurrence}")
+    return slugs
 
 
 def check_markdown_links() -> list[str]:
@@ -49,12 +66,10 @@ def check_markdown_links() -> list[str]:
             # Ignore optional link titles; this project uses simple Markdown links.
             target = raw_target.split(maxsplit=1)[0].strip("<>") if raw_target else ""
             parsed = urlparse(target)
-            if not target or parsed.scheme or parsed.netloc or target.startswith("#"):
+            if not target or parsed.scheme or parsed.netloc:
                 continue
             path_part = unquote(parsed.path)
-            if not path_part:
-                continue
-            candidate = (markdown.parent / path_part).resolve()
+            candidate = (markdown.parent / path_part).resolve() if path_part else markdown.resolve()
             try:
                 candidate.relative_to(ROOT.resolve())
             except ValueError:
@@ -62,6 +77,14 @@ def check_markdown_links() -> list[str]:
                 continue
             if not candidate.exists():
                 errors.append(f"Broken local link: {markdown.relative_to(ROOT)} -> {target}")
+                continue
+            if parsed.fragment and candidate.suffix.lower() == ".md" and candidate.is_file():
+                fragment = unquote(parsed.fragment)
+                heading_slugs = markdown_heading_slugs(candidate.read_text(encoding="utf-8"))
+                if fragment not in heading_slugs:
+                    errors.append(
+                        f"Broken Markdown fragment: {markdown.relative_to(ROOT)} -> {target}"
+                    )
     return errors
 
 

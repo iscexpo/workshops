@@ -2,7 +2,7 @@
 
 **Level:** Beginner · **Duration:** 90 minutes · **Status:** Draft  
 **Audience:** Learners new to programming  
-**Maintainer:** ISC Expo Workshops maintainers · **Last reviewed:** Not yet reviewed
+**Maintainer:** [ISC Expo Workshops maintainers](mailto:info@iscexpo.edu.bd) · **Last reviewed:** Not yet reviewed
 
 ## Learning outcomes
 
@@ -46,6 +46,13 @@ print("Hello, ISC Expo!")
 print("I am learning by building.")
 ```
 
+Expected output:
+
+```text
+Hello, ISC Expo!
+I am learning by building.
+```
+
 Run it with `python hello.py` (or `python3 hello.py`). Change the message and run it again.
 
 **Check your learning:** What does `print()` do? What changed when you edited the text?
@@ -64,6 +71,13 @@ else:
     print("Keep practicing the first task.")
 ```
 
+With the values shown above, the output is:
+
+```text
+Welcome, A learner!
+Ready for the next challenge.
+```
+
 Change the value of `learner_name` and try both values (`True` and `False`) for `completed_first_task`. Do not put your real contact details or another person's personal information into public examples.
 
 ## Guided activity 3: a small function
@@ -75,11 +89,19 @@ def make_greeting(name):
 print(make_greeting("Python learner"))
 ```
 
+Expected output:
+
+```text
+Welcome, Python learner!
+```
+
 Try changing the argument passed to `make_greeting`. Explain the difference between defining a function and calling it.
 
 ## Mini challenge
 
 Create a program that stores a workshop topic and a number of practice tasks, then prints a friendly summary. Add a condition that prints a different message when the number of tasks is greater than zero.
+
+For a starter exercise, run the [hello lab](labs/01-hello.py). The [mini challenge handout](labs/02-mini-challenge.md) includes a sample result and reflection questions.
 
 **Stretch:** Put the summary logic inside a function and write a test for it.
 

@@ -2,7 +2,7 @@
 
 **Level:** Beginner · **Duration:** 90 minutes · **Status:** Draft  
 **Audience:** Learners who want to make a simple web page  
-**Last reviewed:** Not yet reviewed
+**Maintainer:** [ISC Expo Workshops maintainers](mailto:info@iscexpo.edu.bd) · **Last reviewed:** Not yet reviewed
 
 ## Learning outcomes
 
